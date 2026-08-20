@@ -181,7 +181,7 @@ Click events are currently stored synchronously in the database. At high redirec
 
 See [docs/RISKS_AND_TRADEOFFS.md](docs/RISKS_AND_TRADEOFFS.md) for the full discussion.
 
-## -assisted engineering evidence
+## Engineering evidence
 
 The assignment asks for engineer-led  assistance, decomposition, iterative execution, traceability, quality gates, and explicit ownership. This repository documents those aspects rather than hiding  usage:
 
