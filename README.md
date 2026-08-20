@@ -1,18 +1,18 @@
-# AI-Assisted URL Shortener
+URL Shortener
 
-A production-minded Spring Boot prototype created for the **AI-Proficient Software Engineer** interview assignment. The service converts long HTTP/HTTPS URLs into short aliases, redirects users, records privacy-conscious click analytics, and demonstrates engineer-led AI-assisted execution with explicit validation, risk controls, and documentation.
+
 
 ## What is implemented
 
 - Create a short URL with a generated Base62 code or optional custom alias.
 - Redirect `/{code}` using HTTP `302 Found`.
 - Retrieve URL metadata and lifetime click count.
-- Retrieve analytics for an optional time range, including daily click totals.
+- Retrieve analytics for an optional time range, including dly click totals.
 - Deactivate a short URL; subsequent redirects return `410 Gone`.
 - URL, alias, expiration, and request validation.
 - Secure random code generation plus database uniqueness and collision retries.
 - Request correlation through `X-Request-Id`.
-- Best-effort click analytics so a non-critical analytics failure does not intentionally become part of redirect business logic.
+- Best-effort click analytics so a non-critical analytics flure does not intentionally become part of redirect business logic.
 - Privacy-conscious analytics: client address is SHA-256 hashed instead of stored raw.
 - Simple per-instance creation rate limiting.
 - H2 file persistence for a zero-dependency local demo.
@@ -37,7 +37,7 @@ Spring Boot 4.1.0 is intentionally used as the current stable Spring Boot releas
 
 ## Architecture
 
-```mermaid
+```mermd
 flowchart LR
     Client --> Controller[REST / Redirect Controllers]
     Controller --> Validation[Validation + Rate Limit]
@@ -50,7 +50,7 @@ flowchart LR
     Actuator[Actuator Health / Metrics] --> Client
 ```
 
-More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+More detl: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ## API summary
 
@@ -91,7 +91,7 @@ The application starts on:
 http://localhost:8080
 ```
 
-H2 data is persisted under `./data/` so links remain after a restart. To reset the local database, stop the app and delete the `data/` directory.
+H2 data is persisted under `./data/` so links remn after a restart. To reset the local database, stop the app and delete the `data/` directory.
 
 ### Run tests
 
@@ -103,7 +103,7 @@ mvn clean verify
 
 ```bash
 mvn clean package
-java -jar target/ai-assisted-url-shortener-1.0.0.jar
+java -jar target/-assisted-url-shortener-1.0.0.jar
 ```
 
 ## Fast demo
@@ -151,7 +151,7 @@ Timestamps will differ when you run it.
 
 ## Configuration
 
-Main settings are in `src/main/resources/application.yml`.
+Mn settings are in `src/mn/resources/application.yml`.
 
 | Setting | Default | Purpose |
 |---|---:|---|
@@ -165,8 +165,8 @@ Main settings are in `src/main/resources/application.yml`.
 
 ## Reliability and security decisions
 
-1. **Collision safety:** a cryptographically strong `SecureRandom` generates Base62 codes, while the database unique constraint is the final authority. Rare race/collision cases retry.
-2. **Redirect availability:** analytics is non-critical compared with redirect behavior. Click recording is deliberately isolated as a best-effort concern.
+1. **Collision safety:** a cryptographically strong `SecureRandom` generates Base62 codes, while the database unique constrnt is the final authority. Rare race/collision cases retry.
+2. **Redirect avlability:** analytics is non-critical compared with redirect behavior. Click recording is deliberately isolated as a best-effort concern.
 3. **Expiration/deactivation:** an expired or disabled code returns `410 Gone`, distinguishing it from an unknown `404` code.
 4. **Input safety:** only `http` and `https` destinations are accepted. Embedded URL credentials and reserved aliases are rejected.
 5. **Privacy:** raw client addresses are not persisted; only a SHA-256 hash is stored.
@@ -181,27 +181,27 @@ Click events are currently stored synchronously in the database. At high redirec
 
 See [docs/RISKS_AND_TRADEOFFS.md](docs/RISKS_AND_TRADEOFFS.md) for the full discussion.
 
-## AI-assisted engineering evidence
+## -assisted engineering evidence
 
-The assignment asks for engineer-led AI assistance, decomposition, iterative execution, traceability, quality gates, and explicit ownership. This repository documents those aspects rather than hiding AI usage:
+The assignment asks for engineer-led  assistance, decomposition, iterative execution, traceability, quality gates, and explicit ownership. This repository documents those aspects rather than hiding  usage:
 
-- [docs/AI_ENGINEERING_LOG.md](docs/AI_ENGINEERING_LOG.md)
+- [docs/_ENGINEERING_LOG.md](docs/_ENGINEERING_LOG.md)
 - [docs/SCENARIOS.md](docs/SCENARIOS.md)
 - [docs/ASSIGNMENT_MAPPING.md](docs/ASSIGNMENT_MAPPING.md)
 - [docs/TESTING.md](docs/TESTING.md)
 - [docs/FINAL_ENGINEERING_SUMMARY.md](docs/FINAL_ENGINEERING_SUMMARY.md)
 
-The intended position is: **AI accelerated implementation and review preparation; the engineer owns the architecture, acceptance criteria, verification, changes, and final submission.**
+The intended position is: ** accelerated implementation and review preparation; the engineer owns the architecture, acceptance criteria, verification, changes, and final submission.**
 
 ## Suggested GitHub submission flow
 
 ```bash
 git init
 git add .
-git commit -m "Build AI-assisted URL shortener prototype"
-git branch -M main
+git commit -m "Build -assisted URL shortener prototype"
+git branch -M mn
 git remote add origin <YOUR_GITHUB_REPOSITORY_URL>
-git push -u origin main
+git push -u origin mn
 ```
 
 Before sharing the repository, run `mvn clean verify`, run the screenshot demo, and update the validation-result section in `docs/FINAL_ENGINEERING_SUMMARY.md` with your local result.
