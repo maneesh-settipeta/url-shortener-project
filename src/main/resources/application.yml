@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: ai-assisted-url-shortener
+  datasource:
+    url: jdbc:h2:file:./data/urlshortener
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+app:
+  shortener:
+    base-url: ${BASE_URL:http://localhost:8080}
+    code-length: 7
+    max-generation-attempts: 8
+    default-ttl: 30d
+    max-ttl: 365d
+    create-requests-per-minute: 30
+
+logging:
+  pattern:
+    level: "%5p [requestId=%X{requestId:-}]"

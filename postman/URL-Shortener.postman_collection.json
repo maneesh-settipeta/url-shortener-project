@@ -1,0 +1,41 @@
+{
+  "info": {
+    "name": "AI-Assisted URL Shortener",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8080"},
+    {"key": "code", "value": "vendor-demo"}
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {"method": "GET", "url": "{{baseUrl}}/actuator/health"}
+    },
+    {
+      "name": "Create Short URL",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"url\": \"https://example.com/docs\",\n  \"customAlias\": \"vendor-demo\"\n}"},
+        "url": "{{baseUrl}}/api/v1/urls"
+      }
+    },
+    {
+      "name": "Redirect",
+      "request": {"method": "GET", "url": "{{baseUrl}}/{{code}}"}
+    },
+    {
+      "name": "Metadata",
+      "request": {"method": "GET", "url": "{{baseUrl}}/api/v1/urls/{{code}}"}
+    },
+    {
+      "name": "Analytics",
+      "request": {"method": "GET", "url": "{{baseUrl}}/api/v1/urls/{{code}}/analytics"}
+    },
+    {
+      "name": "Deactivate",
+      "request": {"method": "DELETE", "url": "{{baseUrl}}/api/v1/urls/{{code}}"}
+    }
+  ]
+}
